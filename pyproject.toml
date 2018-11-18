@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "docsend"
-version = "0.1.0"
+version = "0.1.1"
 description = "convert docsend to pdf or png sequence"
 authors = ["banteg <banteeg@gmail.com>"]
 license = "MIT"
@@ -13,9 +13,9 @@ pillow = "^5.3"
 
 [tool.poetry.dev-dependencies]
 
+[tool.poetry.scripts]
+docsend = "docsend.cli:main"
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
 
-[tool.poetry.scripts]
-docsend = "docsend.cli:main"
