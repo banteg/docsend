@@ -1,7 +1,6 @@
 from io import BytesIO
 from pathlib import Path
 
-import click
 from PIL import Image
 from requests_html import HTMLSession
 
@@ -32,19 +31,17 @@ class DocSend:
 
     def fetch_image_meta(self):
         self.image_urls = []
-        with click.progressbar(range(1, self.pages + 1), label='fetching page metadata') as bar:
-            for page in bar:
-                img = self.s.get(f'{self.url}/page_data/{page}')
-                img.raise_for_status()
-                self.image_urls.append(img.json()['imageUrl'])
+        for page in range(1, self.pages + 1):
+            img = self.s.get(f'{self.url}/page_data/{page}')
+            img.raise_for_status()
+            self.image_urls.append(img.json()['imageUrl'])
 
     def fetch_images(self):
         self.images = []
-        with click.progressbar(self.image_urls, label='fetching pages') as bar:
-            for url in bar:
-                r = self.s.get(url)
-                r.raise_for_status()
-                self.images.append(Image.open(BytesIO(r.content)))
+        for url in self.image_urls:
+            r = self.s.get(url)
+            r.raise_for_status()
+            self.images.append(Image.open(BytesIO(r.content)))
 
     def save_pdf(self, name=None):
         self.images[0].save(
