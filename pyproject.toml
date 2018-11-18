@@ -16,3 +16,6 @@ pillow = "^5.3"
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
+
+[tool.poetry.scripts]
+docsend = "docsend.cli:main"
