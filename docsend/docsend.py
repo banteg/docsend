@@ -8,7 +8,7 @@ from requests_html import HTMLSession
 class DocSend:
 
     def __init__(self, doc_id):
-        self.doc_id = doc_id
+        self.doc_id = doc_id.rpartition('/')[-1]
         self.url = f'https://docsend.com/view/{doc_id}'
         self.s = HTMLSession()
 
