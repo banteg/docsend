@@ -36,7 +36,6 @@ from docsend import DocSend
 ds = DocSend('abcdef9')
 ds.fetch_meta()
 ds.authorize('me@example.com')
-ds.fetch_image_meta()
 ds.fetch_images()
 ds.save_pdf('doc.pdf')
 ds.save_images('pages')
