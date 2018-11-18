@@ -5,9 +5,9 @@ from docsend import DocSend
 
 @click.command()
 @click.argument('doc_id')
-@click.option('-e', '--email', default=None)
-@click.option('-f', '--format', type=click.Choice(['pdf', 'png']), default='pdf')
-@click.option('-o', '--output', default=None)
+@click.option('-e', '--email', default=None, help='Email to authorize with')
+@click.option('-f', '--format', type=click.Choice(['pdf', 'png']), default='pdf', help='Save as PDF (default) or image sequence')
+@click.option('-o', '--output', default=None, help='Output file name')
 def main(doc_id, email, format, output):
     ds = DocSend(doc_id)
     ds.fetch_meta()
