@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
 from pathlib import Path
 
@@ -29,19 +30,17 @@ class DocSend:
         f = self.s.post(self.url, data=form)
         f.raise_for_status()
 
-    def fetch_image_meta(self):
-        self.image_urls = []
-        for page in range(1, self.pages + 1):
-            img = self.s.get(f'{self.url}/page_data/{page}')
-            img.raise_for_status()
-            self.image_urls.append(img.json()['imageUrl'])
-
     def fetch_images(self):
-        self.images = []
-        for url in self.image_urls:
-            r = self.s.get(url)
-            r.raise_for_status()
-            self.images.append(Image.open(BytesIO(r.content)))
+        self.image_urls = []
+        pool = ThreadPoolExecutor(self.pages)
+        self.images = list(pool.map(self._fetch_image, range(1, self.pages + 1)))
+
+    def _fetch_image(self, page):
+        meta = self.s.get(f'{self.url}/page_data/{page}')
+        meta.raise_for_status()
+        data = self.s.get(meta.json()['imageUrl'])
+        data.raise_for_status()
+        return Image.open(BytesIO(data.content))
 
     def save_pdf(self, name=None):
         self.images[0].save(

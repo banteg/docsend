@@ -13,7 +13,6 @@ def main(doc_id, email, format, output):
     ds.fetch_meta()
     if email:
         ds.authorize(email)
-    ds.fetch_image_meta()
     ds.fetch_images()
     if output is None:
         output = f'docsend_{doc_id}.pdf' if format == 'pdf' else f'docsend_{doc_id}'
