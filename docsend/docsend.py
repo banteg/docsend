@@ -19,12 +19,13 @@ class DocSend:
         self.auth_token = r.html.find('input[@name="authenticity_token"]')[0].attrs['value']
         self.pages = int(r.html.find('.document-thumb-container')[-1].attrs['data-page-num'])
 
-    def authorize(self, email):
+    def authorize(self, email, passcode=None):
         form = {
             'utf8': '✓',
             '_method': 'patch',
             'authenticity_token': self.auth_token,
             'link_auth_form[email]': email,
+            'link_auth_form[passcode]': passcode,
             'commit': 'Continue',
         }
         f = self.s.post(self.url, data=form)
