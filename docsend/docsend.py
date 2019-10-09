@@ -16,7 +16,8 @@ class DocSend:
     def fetch_meta(self):
         r = self.s.get(self.url)
         r.raise_for_status()
-        self.auth_token = r.html.find('input[@name="authenticity_token"]')[0].attrs['value']
+        if r.html.find('input[@name="authenticity_token"]'):
+            self.auth_token = r.html.find('input[@name="authenticity_token"]')[0].attrs['value']
         self.pages = int(r.html.find('.document-thumb-container')[-1].attrs['data-page-num'])
 
     def authorize(self, email, passcode=None):
