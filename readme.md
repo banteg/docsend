@@ -18,6 +18,9 @@ From command line:
 # download a pdf
 docsend doc_id --email me@example.com
 
+# include passcode if required
+docsend doc_id -e me@example.com --passcode 123example123
+
 # download png sequence
 docsend doc_id -e me@example.com --format png
 
@@ -25,7 +28,7 @@ docsend doc_id -e me@example.com --format png
 docsend doc_id -e me@example.com -f pdf --output doc.pdf
 
 # all options combined
-docsend doc_id -e me@example.com -f png -o pages
+docsend doc_id -e me@example.com -p 123example123 -f png -o pages
 ```
 
 From Python code:
@@ -43,5 +46,4 @@ ds.save_images('pages')
 
 ## Missing features
 
-Password authentication is not supported yet.
 You are welcome to contribute.
