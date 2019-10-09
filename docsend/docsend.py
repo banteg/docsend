@@ -41,7 +41,10 @@ class DocSend:
         meta.raise_for_status()
         data = self.s.get(meta.json()['imageUrl'])
         data.raise_for_status()
-        return Image.open(BytesIO(data.content))
+        rgba = Image.open(BytesIO(data.content))
+        rgb = Image.new('RGB', rgba.size, (255, 255, 255))
+        rgb.paste(rgba)
+        return rgb
 
     def save_pdf(self, name=None):
         self.images[0].save(
