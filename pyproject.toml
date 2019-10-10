@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "docsend"
-version = "0.1.3"
+version = "0.2.0"
 description = "convert docsend to pdf or png sequence"
 authors = ["banteg <banteeg@gmail.com>"]
 license = "MIT"
