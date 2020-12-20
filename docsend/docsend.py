@@ -8,9 +8,11 @@ from requests_html import HTMLSession
 
 class DocSend:
 
-    def __init__(self, doc_id):
+    def __init__(self, doc_id, subdomain=None):
         self.doc_id = doc_id.rpartition('/')[-1]
         self.url = f'https://docsend.com/view/{doc_id}'
+        if subdomain:
+            self.url = f'https://{subdomain}.docsend.com/view/{doc_id}'
         self.s = HTMLSession()
 
     def fetch_meta(self):

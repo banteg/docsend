@@ -9,8 +9,9 @@ from docsend import DocSend
 @click.option('-p', '--passcode', default=None, help='Passcode to authorize with')
 @click.option('-f', '--format', type=click.Choice(['pdf', 'png']), default='pdf', help='Save as PDF (default) or image sequence')
 @click.option('-o', '--output', default=None, help='Output file name')
-def main(doc_id, email, passcode, format, output):
-    ds = DocSend(doc_id)
+@click.option('-s', '--subdomain', default=None, help='Optional docsend subdomain, if any')
+def main(doc_id, email, passcode, format, output, subdomain):
+    ds = DocSend(doc_id, subdomain)
     ds.fetch_meta()
     if email:
         if passcode: 
