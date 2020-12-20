@@ -47,3 +47,21 @@ ds.save_images('pages')
 ## Missing features
 
 You are welcome to contribute.
+
+## Contributing & Developing
+
+Open the repo in Github Codespaces:
+
+```
+# Install jpeg lib dependencies missing in Codespaces
+sudo apt-get install libjpeg-dev zlib1g-dev
+
+# Install poetry
+pip install poetry
+
+# Install project dependencies
+poetry install
+
+# Activate the environment
+poetry shell
+```

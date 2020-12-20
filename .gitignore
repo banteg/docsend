@@ -1,4 +1,5 @@
 .idea
+.venv
 docsend/__pycache__
 *.egg-info
 dist
